@@ -28,7 +28,7 @@ namespace PlumsailTest.Controllers
 			return View(model);
 		}
 
-		public IActionResult Privacy()
+		public IActionResult AddingForm()
 		{
 			return View();
 		}
