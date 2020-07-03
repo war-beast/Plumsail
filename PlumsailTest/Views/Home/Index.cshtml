@@ -1,12 +1,29 @@
-﻿@{
+﻿@model HomeViewModel
+
+@{
 	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-	<h1 class="display-4">Welcome</h1>
-	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-	<div id="vue-search-form">{{success}}</div>
-</div>
+	<div class="text-center">
+		<h1 class="display-4">Тестовое приложение</h1>
+		<div class="container-fluid">
+			@if (Model.AnySubmissionExist)
+			{
+			<label for="validationCustomUsername">Поисковая фраза</label>
+				<div class="item-group">
+					<input type="text" class="form-control" id="validationCustomUsername" placeholder="Введите фразу" aria-describedby="inputGroupPrepend" required>
+					<div class="invalid-feedback">
+						Поле "поисковая фраза" должно быть заполено
+					</div>
+				</div>
+			}
+			else
+			{
+				<p>В базе данных нет ни одной записи. Сначала добавьте записи,и только потом уже можно будет искать.</p>
+			}
+		</div>
+		<div id="vue-search-form">{{success}}</div>
+	</div>
 
 @section Scripts
 {

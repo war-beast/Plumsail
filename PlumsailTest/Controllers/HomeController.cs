@@ -1,26 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
+using PlumsailTest.BLL.Interfaces.WebPages;
 using PlumsailTest.Models;
+using System;
+using System.Diagnostics;
 
 namespace PlumsailTest.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		#region private members
 
-		public HomeController(ILogger<HomeController> logger)
+		private readonly IHomePageService _homePageService;
+
+		#endregion
+
+		#region constructor
+		public HomeController(IHomePageService homePageService)
 		{
-			_logger = logger;
+			_homePageService = homePageService ?? throw new ArgumentNullException(nameof(homePageService));
 		}
+
+		#endregion
 
 		public IActionResult Index()
 		{
-			return View();
+			var model = _homePageService.GetPage();
+			return View(model);
 		}
 
 		public IActionResult Privacy()

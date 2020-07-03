@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlumsailTest.BLL.Interfaces;
+using PlumsailTest.BLL.Interfaces.WebPages;
 using PlumsailTest.BLL.Services;
+using PlumsailTest.BLL.Services.WebPages;
 using PlumsailTest.DAL.Interfaces;
 using PlumsailTest.DAL.Repositories;
 
@@ -16,9 +18,15 @@ namespace PlumsailTest
 
 			#endregion
 
-			#region bussiness logic level
+			#region businesslogic level
 
 			services.AddTransient<ISubmissionsService, SubmissionsService>();
+
+			#endregion
+
+			#region MyRegion
+
+			services.AddTransient<IHomePageService, HomePageService>();
 
 			#endregion
 		}
