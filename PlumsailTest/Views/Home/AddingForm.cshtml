@@ -1,6 +1,70 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+	ViewData["Title"] = "Форма добавления записей в БД";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h1 class="display-4">Заполните форму <span class="text-muted">все поля обязательны</span></h1>
+<div class="container-fluid" id="vue-add-form">
+	<form class="was-validated">
+		<div class="form-row mb-3">
+			<div class="col-6">
+				<label for="text-field">Однострочный текст</label>
+				<input type="text" class="form-control" id="text-field" placeholder="текст" required>
+				<div class="invalid-feedback">
+					Пожалуйста введите текст
+				</div>
+			</div>
+
+			<div class="col-6">
+				<label for="date-field">Дата (dd.mm.yyy)</label>
+				<input type="date" class="form-control" id="date-field" placeholder="04.10.2012" required>
+				<div class="invalid-feedback">
+					Пожалуйста введите дату
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-6">
+				<label for="multitext-field">Многострочный текст</label>
+				<textarea class="form-control" id="multitext-field" placeholder="текст" required rows="8"></textarea>
+				<div class="invalid-feedback">
+					Пожалуйста введите текст
+				</div>
+			</div>
+
+			<div class="col-6">
+				<label for="selection-field">Селектор (множественный выбор)</label>
+				<select class="custom-select" id="selection-field" placeholder="04.10.2012" multiple="multiple" required>
+					<option value="Первый">Первый</option>
+					<option value="Второй">Второй</option>
+					<option value="Третий">Третий</option>
+					<option value="Четвёртый">Четвёртый</option>
+					<option value="Пятый">Пятый</option>
+					<option value="Шестой">Шестой</option>
+				</select>
+				<div class="invalid-feedback">
+					Выберите одну или несколько опций
+				</div>
+
+				<div class="custom-control custom-checkbox mb-3 mt-3">
+					<input type="checkbox" class="custom-control-input" id="customControlValidation1">
+					<label class="custom-control-label" for="customControlValidation1">Согласен на обработку персональных данных</label>
+				</div>
+
+				<div class="custom-control custom-radio">
+					<input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+					<label class="custom-control-label" for="customControlValidation2">Выбираю опцию - 1</label>
+				</div>
+				<div class="custom-control custom-radio mb-3">
+					<input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+					<label class="custom-control-label" for="customControlValidation3">Выбираю опцию - 2</label>
+					<div class="invalid-feedback">Пожалуйста, выберите опцию</div>
+				</div>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-around align-items-center">
+			<button type="button" role="button" class="btn btn-primary">Сохранить</button>
+		</div>
+	</form>
+</div>
