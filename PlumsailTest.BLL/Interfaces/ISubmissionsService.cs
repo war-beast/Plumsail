@@ -1,10 +1,12 @@
-﻿using PlumsailTest.BLL.DTO;
-using PlumsailTest.BLL.Models.ViewModels;
+﻿using System.Collections.Generic;
+using PlumsailTest.BLL.DTO;
 
 namespace PlumsailTest.BLL.Interfaces
 {
 	public interface ISubmissionsService
 	{
-		void SaveSubmission(SubmissionViewModel submission);
+		void SaveSubmission(SubmissionDto submission);
+
+		IEnumerable<SubmissionDto> GetAll();
 	}
 }

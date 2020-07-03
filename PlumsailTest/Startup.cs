@@ -31,6 +31,7 @@ namespace PlumsailTest
 				option.EnableEndpointRouting = false;
 			});
 
+			ConfigureAutomapper(services);
 			ConfigureCustomServices(services);
 		}
 
