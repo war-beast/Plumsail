@@ -1,16 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PlumsailTest.DAL;
 
 namespace PlumsailTest
 {
-	public class Startup
+	public partial class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -22,12 +20,18 @@ namespace PlumsailTest
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var connectionString = Configuration.GetConnectionString("DefaultConnection");
+			services.AddDbContext<ApplicationDataContext>(options =>
+				options.UseSqlServer(connectionString));
+
 			services.AddControllersWithViews().AddNewtonsoftJson();
 
 			services.AddMvc(option =>
 			{
 				option.EnableEndpointRouting = false;
 			});
+
+			ConfigureCustomServices(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

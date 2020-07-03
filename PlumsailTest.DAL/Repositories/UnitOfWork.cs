@@ -5,7 +5,7 @@ using System;
 
 namespace PlumsailTest.DAL.Repositories
 {
-	public class UnitOfWorks : IUnitOfWorks, IDisposable
+	public class UnitOfWork : IUnitOfWork, IDisposable
 	{
 		#region private members
 
@@ -18,7 +18,7 @@ namespace PlumsailTest.DAL.Repositories
 
 		#region constructor
 
-		public UnitOfWorks(DbContextOptions<ApplicationDataContext> options)
+		public UnitOfWork(DbContextOptions<ApplicationDataContext> options)
 		{
 			if (options == null)
 				throw new ArgumentNullException(nameof(options));

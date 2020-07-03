@@ -5,7 +5,7 @@ using PlumsailTest.DAL.Entities;
 
 namespace PlumsailTest.DAL.Interfaces
 {
-	public interface IUnitOfWorks
+	public interface IUnitOfWork
 	{
 		IRepository<Submission> Submission { get; }
 

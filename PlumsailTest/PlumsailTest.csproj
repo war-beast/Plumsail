@@ -12,4 +12,8 @@
 		<None Remove="npm-debug.log" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\PlumsailTest.DAL\PlumsailTest.DAL.csproj" />
+	</ItemGroup>
+
 </Project>
