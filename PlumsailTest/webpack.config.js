@@ -12,7 +12,8 @@ const bundleFolder = "wwwroot/bundle/";
 
 let configuration = {
 	entry: {
-		mainPage: "./Src/pages/main/initialize.js"
+		mainPage: "./Src/pages/main/initialize.js",
+		addPage: "./Src/pages/addForm/initialize.js"
 	},
 	output: {
 		filename: "[name].bundle.js",
@@ -48,7 +49,8 @@ let configuration = {
 			vue$: "vue/dist/vue.esm.js",
 			Vue$: "vue/dist/vue.esm.js",
 
-			MainPage: path.resolve(__dirname, "./Src/pages/main/")
+			MainPage: path.resolve(__dirname, "./Src/pages/main/"),
+			AddPage: path.resolve(__dirname, "./Src/pages/addForm/")
 		}
 	},
 	module: {
