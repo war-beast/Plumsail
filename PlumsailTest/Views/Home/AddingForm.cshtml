@@ -9,7 +9,7 @@
 		<div class="form-row mb-3">
 			<div class="col-6">
 				<label for="text-field">Однострочный текст</label>
-				<input type="text" class="form-control" id="text-field" placeholder="текст" required>
+				<input type="text" class="form-control" id="text-field" placeholder="текст" required v-model="singleText">
 				<div class="invalid-feedback">
 					Пожалуйста введите текст
 				</div>
@@ -17,7 +17,7 @@
 
 			<div class="col-6">
 				<label for="date-field">Дата (dd.mm.yyy)</label>
-				<input type="date" class="form-control" id="date-field" placeholder="04.10.2012" required>
+				<input type="date" class="form-control" id="date-field" placeholder="04.10.2012" required v-model="dateText">
 				<div class="invalid-feedback">
 					Пожалуйста введите дату
 				</div>
@@ -27,7 +27,7 @@
 		<div class="form-row">
 			<div class="col-6">
 				<label for="multitext-field">Многострочный текст</label>
-				<textarea class="form-control" id="multitext-field" placeholder="текст" required rows="8"></textarea>
+				<textarea class="form-control" id="multitext-field" placeholder="текст" required rows="8" v-model="multiText"></textarea>
 				<div class="invalid-feedback">
 					Пожалуйста введите текст
 				</div>
@@ -35,7 +35,7 @@
 
 			<div class="col-6">
 				<label for="selection-field">Селектор (множественный выбор)</label>
-				<select class="custom-select" id="selection-field" placeholder="04.10.2012" multiple="multiple" required>
+				<select class="custom-select" id="selection-field" placeholder="04.10.2012" multiple="multiple" required v-model="multiSelect">
 					<option value="Первый">Первый</option>
 					<option value="Второй">Второй</option>
 					<option value="Третий">Третий</option>
@@ -48,28 +48,28 @@
 				</div>
 
 				<div class="custom-control custom-checkbox mb-3 mt-3">
-					<input type="checkbox" class="custom-control-input" id="customControlValidation1">
+					<input type="checkbox" class="custom-control-input" id="customControlValidation1" v-model="checkBox">
 					<label class="custom-control-label" for="customControlValidation1">Согласен на обработку персональных данных</label>
 				</div>
 
 				<div class="custom-control custom-radio">
-					<input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+					<input type="radio" class="custom-control-input" id="customControlValidation2" required v-model="radioStacked" value="option-1">
 					<label class="custom-control-label" for="customControlValidation2">Выбираю опцию - 1</label>
 				</div>
 				<div class="custom-control custom-radio mb-3">
-					<input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+					<input type="radio" class="custom-control-input" id="customControlValidation3" required v-model="radioStacked" value="option-2">
 					<label class="custom-control-label" for="customControlValidation3">Выбираю опцию - 2</label>
 					<div class="invalid-feedback">Пожалуйста, выберите опцию</div>
 				</div>
 			</div>
 		</div>
 		<div class="row d-flex justify-content-around align-items-center">
-			<button type="button" role="button" class="btn btn-primary" v-on:click="sendForm">Сохранить</button>
+			<button type="button" role="button" class="btn btn-primary" v-on:click="sendForm()">Сохранить</button>
 		</div>
 	</form>
 </div>
 
 @section Scripts
 {
-	<script src="bundle/addPage.bundle.js"></script>
+	<script src="~/bundle/addPage.bundle.js"></script>
 }

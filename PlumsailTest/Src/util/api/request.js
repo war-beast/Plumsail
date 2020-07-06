@@ -1,7 +1,6 @@
 ﻿import axios from "axios";
 import RequestException from "Exceptions/requestException";
 
-const submitFormUrl = "/api/common/createItem";
 const getDataUrl = "/api/common/getSearchResult";
 
 export default class Request {
@@ -62,6 +61,21 @@ export default class Request {
 					};
 				}
 			});
+		}
+
+
+		this.getData = async function (url) {
+			return await sendGetRequest(url)
+				.then((result) => {
+					return result;
+				});
+		}
+
+		this.postData = async function (url, customer) {
+			return await sendPostRequest(url, customer)
+				.then((result) => {
+					return result;
+				});
 		}
 	}
 }
