@@ -11,7 +11,7 @@ using PlumsailTest.BLL.Models.ViewModels;
 
 namespace PlumsailTest.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/common")]
 	[ApiController]
 	public class ApiController : ControllerBase
 	{

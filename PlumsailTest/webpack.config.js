@@ -49,6 +49,8 @@ let configuration = {
 			vue$: "vue/dist/vue.esm.js",
 			Vue$: "vue/dist/vue.esm.js",
 
+			Exceptions: path.resolve(__dirname, "./Src/exceptions/"),
+			Api: path.resolve(__dirname, "./Src/util/api/"),
 			MainPage: path.resolve(__dirname, "./Src/pages/main/"),
 			AddPage: path.resolve(__dirname, "./Src/pages/addForm/")
 		}
