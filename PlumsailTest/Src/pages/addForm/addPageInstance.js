@@ -52,14 +52,13 @@ export default () => {
 					value: this.radioStacked
 				});
 
-				this.sendRequest(fields);
-			},
-			async sendRequest(fields) {
 				this.error = null;
 				this.formValid = this.checkValid();
-				if (this.formValid)
-					this.sendRequest(`${submitFormUrl}?phrase=${this.phrase}`);
-
+				if (this.formValid) {
+					this.sendRequest(fields);
+				}
+			},
+			async sendRequest(fields) {
 				await request.postData(submitFormUrl, fields)
 					.then((result) => {
 						if (result.success)

@@ -35,13 +35,15 @@ namespace PlumsailTest.DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SubmissionId");
 
                     b.HasIndex("SubmissionId1");
+
+                    b.HasIndex("Value");
 
                     b.ToTable("FieldParameters");
                 });
