@@ -13,6 +13,7 @@ export default () => {
 			multiSelect: [],
 			checkBox: false,
 			radioStacked: null,
+			formValid: true,
 			error: null
 		},
 		methods: {
@@ -55,6 +56,9 @@ export default () => {
 			},
 			async sendRequest(fields) {
 				this.error = null;
+				this.formValid = this.checkValid();
+				if (this.formValid)
+					this.sendRequest(`${submitFormUrl}?phrase=${this.phrase}`);
 
 				await request.postData(submitFormUrl, fields)
 					.then((result) => {
@@ -63,6 +67,13 @@ export default () => {
 						else
 							this.error = result.value;
 					});
+			},
+			checkValid() {
+				return this.singleText !== null && this.singleText !== ""
+					&& this.dateText !== null && this.dateText !== ""
+					&& this.multiText !== null && this.multiText !== ""
+					&& this.multiSelect !== null && this.multiSelect.length !== 0
+					&& this.radioStacked !== null && this.radioStacked !== "";
 			}
 		},
 		created() {

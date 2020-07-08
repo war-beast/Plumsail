@@ -5,7 +5,7 @@
 
 <h1 class="display-4">Заполните форму <span class="text-muted">все поля обязательны</span></h1>
 <div class="container-fluid" id="vue-add-form">
-	<form class="was-validated">
+	<form v-bind:class="{ 'was-validated': !formValid }">
 		<div class="form-row mb-3">
 			<div class="col-6">
 				<label for="text-field">Однострочный текст</label>
