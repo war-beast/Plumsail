@@ -1,6 +1,4 @@
-# Plumsail
-
-Тестовое задание от Plumsail
+# Тестовое задание от Plumsail
 
 Test task for Vue JS and C# programmers
 
