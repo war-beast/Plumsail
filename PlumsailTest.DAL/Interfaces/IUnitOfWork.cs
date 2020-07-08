@@ -8,6 +8,7 @@ namespace PlumsailTest.DAL.Interfaces
 	public interface IUnitOfWork
 	{
 		IRepository<Submission> Submission { get; }
+		IRepository<FieldParameter> Parameters { get; }
 
 		void Save();
 	}

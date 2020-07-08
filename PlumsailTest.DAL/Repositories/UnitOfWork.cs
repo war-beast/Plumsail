@@ -11,6 +11,7 @@ namespace PlumsailTest.DAL.Repositories
 
 		private ApplicationDataContext _db;
 		private SubmissionsRepository _submissionsRepository;
+		private ParametersRepository _parametersRepository;
 
 		private bool disposed = false;
 
@@ -29,6 +30,8 @@ namespace PlumsailTest.DAL.Repositories
 		#endregion
 
 		public IRepository<Submission> Submission => _submissionsRepository ??= new SubmissionsRepository(_db);
+
+		public IRepository<FieldParameter> Parameters => _parametersRepository ??= new ParametersRepository(_db);
 
 		public void Save()
 		{
