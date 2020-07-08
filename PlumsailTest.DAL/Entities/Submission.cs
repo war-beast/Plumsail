@@ -1,7 +1,9 @@
-﻿namespace PlumsailTest.DAL.Entities
+﻿using System.Collections.Generic;
+
+namespace PlumsailTest.DAL.Entities
 {
 	public class Submission : BaseEntity
 	{
-		public string Value { get; set; }
+		public ICollection<FieldParameter> Parameters { get; set; }
 	}
 }
