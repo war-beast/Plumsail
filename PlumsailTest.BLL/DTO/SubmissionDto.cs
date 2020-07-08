@@ -1,7 +1,10 @@
-﻿namespace PlumsailTest.BLL.DTO
+﻿using System.Collections.Generic;
+using PlumsailTest.BLL.Models.ViewModels;
+
+namespace PlumsailTest.BLL.DTO
 {
 	public class SubmissionDto : BaseDto
 	{
-		public string Value { get; set; }
+		public List<FormField> Fields { get; set; }
 	}
 }

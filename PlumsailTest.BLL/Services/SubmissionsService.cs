@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using PlumsailTest.BLL.DTO;
 using PlumsailTest.BLL.Interfaces;
 using PlumsailTest.DAL.Entities;
 using PlumsailTest.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using PlumsailTest.BLL.Models.ViewModels;
 
 namespace PlumsailTest.BLL.Services
 {
@@ -25,12 +27,16 @@ namespace PlumsailTest.BLL.Services
 
 		#endregion
 
-		public void SaveSubmission(SubmissionDto submission)
+		public void SaveSubmission(List<FormField> fields)
 		{
-			var coreSubmission = _mapper.Map<Submission>(submission);
-			_unitOfWork.Submission.Create(coreSubmission);
+			foreach (var field in fields)
+			{
+				
+			}
+			//var coreSubmission = _mapper.Map<Submission>(submission);
+			//_unitOfWork.Submission.Create(coreSubmission);
 
-			_unitOfWork.Save();
+			//_unitOfWork.Save();
 		}
 
 		public IEnumerable<SubmissionDto> GetAll()

@@ -11,11 +11,6 @@ namespace PlumsailTest.BLL.Mapping
 		{
 			CreateMap<Submission, SubmissionDto>();
 			CreateMap<SubmissionDto, Submission>();
-
-			CreateMap<SubmissionViewModel, SubmissionDto>()
-				.ForMember(destination => destination.Value, opt => opt.MapFrom(source => source.SerializedJsonValue));
-			CreateMap<SubmissionDto, SubmissionViewModel>()
-				.ForMember(destination => destination.SerializedJsonValue, opt => opt.MapFrom(source => source.Value)); ;
 		}
 	}
 }

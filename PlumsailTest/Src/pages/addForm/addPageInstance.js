@@ -11,30 +11,41 @@ export default () => {
 			dateText: null,
 			multiText: null,
 			multiSelect: [],
-			checkBox: null,
+			checkBox: false,
 			radioStacked: null
 		},
 		methods: {
 			sendForm() {
-				let st = {
-					singleText: this.singleText,
-					dateText: this.dateText,
-					multiText: this.multiText,
-					checkBox: this.checkBox,
-					multiSelect: this.multiSelect,
-					radioStacked: this.radioStacked
-				}
+				let fields = [];
+				fields.push({
+					name: "singleText",
+					value: this.singleText
+				});
+				fields.push({
+					name: "dateText",
+					value: this.dateText
+				});
+				fields.push({
+					name: "multiText",
+					value: this.multiText
+				});
+				fields.push({
+					name: "checkBox",
+					value: `${this.checkBox}`
+				});
+				fields.push({
+					name: "multiSelect",
+					value: `${this.multiSelect}`
+				});
+				fields.push({
+					name: "radioStacked",
+					value: this.radioStacked
+				});
 
-				let str = JSON.stringify(st);
-
-				this.sendRequest(str);
+				this.sendRequest(fields);
 			},
-			async sendRequest(str) {
-				let data = {
-					serializedJsonValue: str
-				}
-
-				await request.postData(submitFormUrl, data);
+			async sendRequest(fields) {
+				await request.postData(submitFormUrl, fields);
 			}
 		}
 	};

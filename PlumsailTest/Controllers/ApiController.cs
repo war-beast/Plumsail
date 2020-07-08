@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace PlumsailTest.Controllers
 		#endregion
 
 		[Route("createItem")]
-		public async Task<IActionResult> CreateItem(SubmissionViewModel model)
+		public IActionResult CreateItem(List<FormField> fields)
 		{
 			var result = new CommonResult {
 				ErrorMessage = "Ошибка заполнения формы"
@@ -41,27 +42,38 @@ namespace PlumsailTest.Controllers
 
 			#region validation
 
+			if (fields == null)
+			{
+				return BadRequest(GetSerializedResult(result));
+			}
+
 			if (!ModelState.IsValid)
 			{
-				return BadRequest(JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
-				{
-					ContractResolver = new CamelCasePropertyNamesContractResolver()
-				}));
+				return BadRequest(GetSerializedResult(result));
 			}
 
 			#endregion
 
-			_submissionsService.SaveSubmission(_mapper.Map<SubmissionDto>(model));
+			_submissionsService.SaveSubmission(fields);
 			result = new CommonResult
 			{
 				Success = true,
 				ErrorMessage = null
 			};
 
-			return Ok(JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
+			return Ok(GetSerializedResult(result));
+		}
+
+		#region private methods
+
+		private static string GetSerializedResult(CommonResult result)
+		{
+			return JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver()
-			}));
+			});
 		}
+
+		#endregion
 	}
 }
