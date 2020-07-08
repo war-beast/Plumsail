@@ -32,6 +32,16 @@ namespace PlumsailTest.DAL.Repositories
 
 			#endregion
 
+			item.Id = Guid.NewGuid();
+
+			item.Parameters = item.Parameters
+				.Select(x =>
+				{
+					x.SubmissionId = item.Id;
+					return x;
+				})
+				.ToList();
+
 			_db.Submissions.Add(item);
 		}
 

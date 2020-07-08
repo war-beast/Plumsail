@@ -31,7 +31,7 @@ export default () => {
 				});
 				fields.push({
 					name: "checkBox",
-					value: `${this.checkBox}`
+					value: this.checkBox
 				});
 				fields.push({
 					name: "multiSelect",

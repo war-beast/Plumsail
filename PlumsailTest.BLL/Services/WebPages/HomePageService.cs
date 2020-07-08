@@ -1,9 +1,9 @@
-﻿using PlumsailTest.BLL.Interfaces.WebPages;
-using PlumsailTest.BLL.Models.ViewModels;
-using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore.Internal;
 using PlumsailTest.BLL.Interfaces;
+using PlumsailTest.BLL.Interfaces.WebPages;
+using PlumsailTest.BLL.Models.ViewModels;
+using System;
 
 namespace PlumsailTest.BLL.Services.WebPages
 {
@@ -12,16 +12,14 @@ namespace PlumsailTest.BLL.Services.WebPages
 		#region private members
 
 		private readonly ISubmissionsService _submissionsService;
-		private readonly IMapper _mapper;
 
 		#endregion
 
 		#region constructor
 
-		public HomePageService(ISubmissionsService submissionsService, IMapper mapper)
+		public HomePageService(ISubmissionsService submissionsService)
 		{
 			_submissionsService = submissionsService ?? throw new ArgumentNullException(nameof(submissionsService));
-			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 		}
 
 		#endregion

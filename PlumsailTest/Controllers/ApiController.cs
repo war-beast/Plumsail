@@ -54,7 +54,7 @@ namespace PlumsailTest.Controllers
 
 			#endregion
 
-			_submissionsService.SaveSubmission(fields);
+			_submissionsService.SaveSubmission(new SubmissionDto{ Fields = fields });
 			result = new CommonResult
 			{
 				Success = true,

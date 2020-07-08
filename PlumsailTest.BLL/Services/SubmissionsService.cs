@@ -27,16 +27,12 @@ namespace PlumsailTest.BLL.Services
 
 		#endregion
 
-		public void SaveSubmission(List<FormField> fields)
+		public void SaveSubmission(SubmissionDto submission)
 		{
-			foreach (var field in fields)
-			{
-				
-			}
-			//var coreSubmission = _mapper.Map<Submission>(submission);
-			//_unitOfWork.Submission.Create(coreSubmission);
+			var coreSubmission = _mapper.Map<Submission>(submission);
+			_unitOfWork.Submission.Create(coreSubmission);
 
-			//_unitOfWork.Save();
+			_unitOfWork.Save();
 		}
 
 		public IEnumerable<SubmissionDto> GetAll()
