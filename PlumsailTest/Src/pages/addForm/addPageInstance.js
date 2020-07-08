@@ -1,7 +1,7 @@
 ﻿import ApiRequest from "Api/request";
 
 const request = new ApiRequest();
-const submitFormUrl = "/api/common/createItem";
+const submitFormUrl = "/api/common/addParameters";
 
 export default () => {
 	return {

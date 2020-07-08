@@ -42,8 +42,8 @@ namespace PlumsailTest.Controllers
 
 		#endregion
 
-		[Route("createItem")]
-		public IActionResult CreateItem(List<FormField> fields)
+		[Route("addParameters")]
+		public IActionResult AddParameters(List<FormField> fields)
 		{
 			#region validation
 
