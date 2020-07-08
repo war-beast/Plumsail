@@ -9,20 +9,23 @@
 	<div class="container-fluid" id="vue-search-form">
 		@if (Model.AnySubmissionExist)
 		{
+		<form v-bind:class="{ 'was-validated': !formValid }">
 			<label for="validationCustomUsername">Поисковая фраза</label>
-			<div class="item-group">
-				<input type="text" class="form-control" id="validationCustomUsername" placeholder="Введите фразу" aria-describedby="inputGroupPrepend" required>
+			<div class="input-group">
+				<input type="text" class="form-control" id="validationCustomUsername" placeholder="Введите фразу" aria-describedby="inputGroupPrepend" required v-model="phrase">
+				<div class="input-group-append">
+					<button type="button" v-on:click="search">Upload</button>
+				</div>
 				<div class="invalid-feedback">
 					Поле "поисковая фраза" должно быть заполено
 				</div>
 			</div>
+		</form>
 		}
 		else
 		{
 			<p>В базе данных нет ни одной записи. Сначала добавьте записи, и только потом уже можно будет искать. Добавлять здесь: <a href="/Home/AddingForm"></a></p>
 		}
-
-		{{success}}
 	</div>
 </div>
 

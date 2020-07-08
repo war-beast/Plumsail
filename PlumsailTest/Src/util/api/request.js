@@ -1,8 +1,6 @@
 ﻿import axios from "axios";
 import RequestException from "Exceptions/requestException";
 
-const getDataUrl = "/api/common/getSearchResult";
-
 export default class Request {
 	constructor() {
 		let sendGetRequest = async function(url) {

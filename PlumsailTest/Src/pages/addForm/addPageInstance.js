@@ -12,9 +12,18 @@ export default () => {
 			multiText: null,
 			multiSelect: [],
 			checkBox: false,
-			radioStacked: null
+			radioStacked: null,
+			error: null
 		},
 		methods: {
+			initModel() {
+				this.singleText = null;
+				this.dateText = null;
+				this.multiText = null;
+				this.multiSelect = [];
+				this.checkBox = false;
+				this.radioStacked = null;
+			},
 			sendForm() {
 				let fields = [];
 				fields.push({
@@ -45,8 +54,19 @@ export default () => {
 				this.sendRequest(fields);
 			},
 			async sendRequest(fields) {
-				await request.postData(submitFormUrl, fields);
+				this.error = null;
+
+				await request.postData(submitFormUrl, fields)
+					.then((result) => {
+						if (result.success)
+							this.initModel();
+						else
+							this.error = result.value;
+					});
 			}
+		},
+		created() {
+			this.initModel();
 		}
 	};
 };

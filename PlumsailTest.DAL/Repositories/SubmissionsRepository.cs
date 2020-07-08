@@ -3,6 +3,7 @@ using PlumsailTest.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace PlumsailTest.DAL.Repositories
 {
@@ -15,12 +16,12 @@ namespace PlumsailTest.DAL.Repositories
 
 		public IEnumerable<Submission> GetAll()
 		{
-			return _db.Submissions;
+			return _db.Submissions.Include(x => x.Parameters);
 		}
 
 		public Submission Get(Guid id)
 		{
-			return _db.Submissions.First(x => x.Id == id);
+			return _db.Submissions.Include(x => x.Parameters).First(x => x.Id == id);
 		}
 
 		public void Create(Submission item)
