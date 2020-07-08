@@ -4,28 +4,42 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-	<h1 class="display-4">Тестовое приложение</h1>
-	<div class="container-fluid" id="vue-search-form">
+<h1 class="display-4">Тестовое приложение</h1>
+<div class="container-fluid" id="vue-search-form">
+	<div class="text-center">
 		@if (Model.AnySubmissionExist)
 		{
-		<form v-bind:class="{ 'was-validated': !formValid }">
-			<label for="validationCustomUsername">Поисковая фраза</label>
-			<div class="input-group">
-				<input type="text" class="form-control" id="validationCustomUsername" placeholder="Введите фразу" aria-describedby="inputGroupPrepend" required v-model="phrase">
-				<div class="input-group-append">
-					<button type="button" v-on:click="search">Upload</button>
+			<form v-bind:class="{ 'was-validated': !formValid }">
+				<label for="validationCustomUsername">Поисковая фраза</label>
+				<div class="input-group">
+					<input type="text" class="form-control" id="validationCustomUsername" placeholder="Введите фразу" aria-describedby="inputGroupPrepend" required v-model="phrase">
+					<div class="input-group-append">
+						<button type="button" v-on:click="search" class="btn btn-primary">Найти</button>
+					</div>
+					<div class="invalid-feedback">
+						Поле "поисковая фраза" должно быть заполено
+					</div>
 				</div>
-				<div class="invalid-feedback">
-					Поле "поисковая фраза" должно быть заполено
-				</div>
-			</div>
-		</form>
+			</form>
 		}
 		else
 		{
 			<p>В базе данных нет ни одной записи. Сначала добавьте записи, и только потом уже можно будет искать. Добавлять здесь: <a href="/Home/AddingForm"></a></p>
 		}
+	</div>
+	<div class="container-fluid mt-4" v-if="searchResult !== null">
+		<h2 class="h4">Результатов найдено {{searchResult.length}}</h2>
+		<div class="row mb-3 mt-3 pt-2 pb-2 bg-light" v-for="(item, index) in searchResult">
+			<div class="col-1"><span class="badge badge-pill badge-primary">{{index + 1}}</span></div>
+			<div class="col-11 d-flex flex-wrap justify-content-between">
+				<div v-for="field in item.fields">
+					<span class="text-dark">{{field.name}}</span>: <span class="text-muted">{{field.value}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid mt-4" v-else>
+		<h2 class="h4">Нет результатов, удовлетворяющих условиям поиска.</h2>
 	</div>
 </div>
 

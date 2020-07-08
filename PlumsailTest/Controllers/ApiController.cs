@@ -19,16 +19,25 @@ namespace PlumsailTest.Controllers
 		#region private members
 
 		private readonly ISubmissionsService _submissionsService;
+		private readonly ISearchService _searchService;
 		private readonly IMapper _mapper;
+
+		private CommonResult _result = new CommonResult
+		{
+			ErrorMessage = "Ошибка заполнения формы"
+		};
 
 		#endregion
 
 		#region constructor
 
-		public ApiController(ISubmissionsService submissionsService, IMapper mapper)
+		public ApiController(ISubmissionsService submissionsService, 
+			IMapper mapper, 
+			ISearchService searchService)
 		{
 			_submissionsService = submissionsService ?? throw new ArgumentNullException(nameof(submissionsService));
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+			_searchService = searchService ?? throw new ArgumentNullException(nameof(searchService));
 		}
 
 		#endregion
@@ -36,32 +45,46 @@ namespace PlumsailTest.Controllers
 		[Route("createItem")]
 		public IActionResult CreateItem(List<FormField> fields)
 		{
-			var result = new CommonResult {
-				ErrorMessage = "Ошибка заполнения формы"
-			};
-
 			#region validation
 
 			if (fields == null)
 			{
-				return BadRequest(GetSerializedResult(result));
+				return BadRequest(GetSerializedResult(_result));
 			}
 
 			if (!ModelState.IsValid)
 			{
-				return BadRequest(GetSerializedResult(result));
+				return BadRequest(GetSerializedResult(_result));
 			}
 
 			#endregion
 
 			_submissionsService.SaveSubmission(new SubmissionDto{ Fields = fields });
-			result = new CommonResult
+			_result = new CommonResult
 			{
 				Success = true,
 				ErrorMessage = null
 			};
 
-			return Ok(GetSerializedResult(result));
+			return Ok(GetSerializedResult(_result));
+		}
+
+		[Route("getSearchResult")]
+		public IActionResult GetSearchResult(string phrase)
+		{
+			#region valodation
+
+			if(string.IsNullOrWhiteSpace(phrase))
+				return BadRequest(GetSerializedResult(_result));
+
+			#endregion
+
+			var searchResult = _searchService.Find(phrase);
+
+			return Ok(JsonConvert.SerializeObject(searchResult, Formatting.None, new JsonSerializerSettings
+			{
+				ContractResolver = new CamelCasePropertyNamesContractResolver()
+			}));
 		}
 
 		#region private methods

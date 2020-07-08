@@ -16,10 +16,10 @@ export default () => {
 			search() {
 				this.formValid = this.checkValid();
 				if (this.formValid)
-					sendRequest(`${submitFormUrl}?phrase=${this.phrase}`);
+					this.sendRequest(`${submitFormUrl}?phrase=${this.phrase}`);
 			},
 			checkValid() {
-				return this.phrase !== null;
+				return this.phrase !== null && this.phrase !== "";
 			},
 			async sendRequest(url) {
 				this.error = null;
@@ -27,13 +27,13 @@ export default () => {
 				await request.getData(url)
 					.then((result) => {
 						if (result.success)
-							this.showResult(result.value);
+							this.showResult(JSON.parse(result.value));
 						else
 							this.error = result.value;
 					});
 			},
 			showResult(result) {
-				var res = result;
+				this.searchResult = result;
 			}
 		}
 	};

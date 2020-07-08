@@ -1,6 +1,8 @@
 ﻿using PlumsailTest.BLL.DTO;
 using PlumsailTest.BLL.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using PlumsailTest.DAL.Interfaces;
 
@@ -23,9 +25,20 @@ namespace PlumsailTest.BLL.Services
 
 		#endregion
 
-		public SubmissionDto Find(string phrase)
+		public IEnumerable<SubmissionDto> Find(string phrase)
 		{
-			throw new NotImplementedException();
+			var parameters = _unitOfWork
+				.Parameters
+				.GetAll()
+				.Where(x => x.Value.Contains(phrase, StringComparison.InvariantCultureIgnoreCase))
+				.Select(x => x.SubmissionId)
+				.Distinct();
+
+			var submissionsWithDependent = parameters
+				.Select(x => _unitOfWork.Submission.Get(x))
+				.ToList();
+
+			return _mapper.Map<IEnumerable<SubmissionDto>>(submissionsWithDependent);
 		}
 	}
 }

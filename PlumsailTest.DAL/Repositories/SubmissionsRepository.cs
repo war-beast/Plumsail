@@ -21,7 +21,7 @@ namespace PlumsailTest.DAL.Repositories
 
 		public Submission Get(Guid id)
 		{
-			return _db.Submissions.Include(x => x.Parameters).First(x => x.Id == id);
+			return GetSubmission(_db, id);
 		}
 
 		public void Create(Submission item)
@@ -66,5 +66,15 @@ namespace PlumsailTest.DAL.Repositories
 
 			_db.Submissions.Remove(item);
 		}
+
+		#region private methods
+
+		private static readonly Func<ApplicationDataContext, Guid, Submission> GetSubmission =
+			EF.CompileQuery((ApplicationDataContext db, Guid id) =>
+				db.Submissions
+					.Include(x => x.Parameters)
+					.First(x => x.Id == id));
+
+		#endregion
 	}
 }
