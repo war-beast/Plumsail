@@ -3,6 +3,7 @@ using PlumsailTest.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using PlumsailTest.DAL.Interfaces;
 
@@ -25,7 +26,7 @@ namespace PlumsailTest.BLL.Services
 
 		#endregion
 
-		public IEnumerable<SubmissionDto> Find(string phrase)
+		public Task<IEnumerable<SubmissionDto>> Find(string phrase)
 		{
 			var parameters = _unitOfWork
 				.Parameters
@@ -35,10 +36,9 @@ namespace PlumsailTest.BLL.Services
 				.Distinct();
 
 			var submissionsWithDependent = parameters
-				.Select(x => _unitOfWork.Submission.Get(x))
-				.ToList();
+				.Select(x => _unitOfWork.Submission.Get(x));
 
-			return _mapper.Map<IEnumerable<SubmissionDto>>(submissionsWithDependent);
+			return Task.Run(() => _mapper.Map<IEnumerable<SubmissionDto>>(submissionsWithDependent));
 		}
 	}
 }

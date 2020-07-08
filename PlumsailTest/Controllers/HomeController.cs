@@ -22,6 +22,7 @@ namespace PlumsailTest.Controllers
 
 		#endregion
 
+		[ResponseCache(Duration = 300)]
 		public IActionResult Index()
 		{
 			var model = _homePageService.GetPage();

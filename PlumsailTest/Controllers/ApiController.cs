@@ -22,7 +22,7 @@ namespace PlumsailTest.Controllers
 		private readonly ISearchService _searchService;
 		private readonly IMapper _mapper;
 
-		private CommonResult _result = new CommonResult
+		private readonly CommonResult _defaultResult = new CommonResult
 		{
 			ErrorMessage = "Ошибка заполнения формы"
 		};
@@ -49,37 +49,36 @@ namespace PlumsailTest.Controllers
 
 			if (fields == null)
 			{
-				return BadRequest(GetSerializedResult(_result));
+				return BadRequest(GetSerializedResult(_defaultResult));
 			}
 
 			if (!ModelState.IsValid)
 			{
-				return BadRequest(GetSerializedResult(_result));
+				return BadRequest(GetSerializedResult(_defaultResult));
 			}
 
 			#endregion
 
 			_submissionsService.SaveSubmission(new SubmissionDto{ Fields = fields });
-			_result = new CommonResult
+
+			return Ok(GetSerializedResult(new CommonResult
 			{
 				Success = true,
 				ErrorMessage = null
-			};
-
-			return Ok(GetSerializedResult(_result));
+			}));
 		}
 
 		[Route("getSearchResult")]
-		public IActionResult GetSearchResult(string phrase)
+		public async Task<IActionResult> GetSearchResult(string phrase)
 		{
 			#region valodation
 
 			if(string.IsNullOrWhiteSpace(phrase))
-				return BadRequest(GetSerializedResult(_result));
+				return BadRequest(GetSerializedResult(_defaultResult));
 
 			#endregion
 
-			var searchResult = _searchService.Find(phrase);
+			var searchResult = await _searchService.Find(phrase);
 
 			return Ok(JsonConvert.SerializeObject(searchResult, Formatting.None, new JsonSerializerSettings
 			{
