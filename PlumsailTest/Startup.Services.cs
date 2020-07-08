@@ -21,6 +21,7 @@ namespace PlumsailTest
 			#region businesslogic level
 
 			services.AddTransient<ISubmissionsService, SubmissionsService>();
+			services.AddTransient<ISearchService, SearchService>();
 
 			#endregion
 
