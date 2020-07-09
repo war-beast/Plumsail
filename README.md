@@ -23,5 +23,5 @@ Server: .NET Core 2+ or 3+
 
 Deadline
 There are no strict deadlines. We understand that you may be working on another job. It would be great if you could complete it within a week.
-
+***
 *Примечание: выполнено за 12 часов 7 минут
